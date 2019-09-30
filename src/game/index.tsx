@@ -2,7 +2,13 @@ import React from 'react';
 import './index.css';
 import Board from '../board';
 
-const Game = () => {
+interface OwnProps {
+
+}
+
+type Props = OwnProps;
+
+const Game: React.FC<Props> = () => {
   return (
     <div className="game">
       <div className="game-board">
@@ -14,6 +20,6 @@ const Game = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Game;
