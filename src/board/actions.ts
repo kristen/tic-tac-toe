@@ -1,9 +1,9 @@
 import {ActionType, createStandardAction} from "typesafe-actions";
 
-export const clickSquare = createStandardAction('square/CLICK').map((i: number) => ({
+export const clickSquare = createStandardAction('square/CLICK').map((i: number, xIsNext: boolean) => ({
         payload: {
             i,
-            value: "X",
+            xIsNext,
         },
     }));
 

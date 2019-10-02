@@ -5,20 +5,31 @@ import {combineReducers} from "redux";
 
 export interface BoardState {
     squares: string[];
+    xIsNext: boolean;
 }
 
 const squares = (state: string[] =  new Array(9), action: BoardActions) => {
     switch (action.type) {
         case getType(actions.clickSquare):
-            const {i, value} = action.payload;
+            const {i, xIsNext} = action.payload;
             const copy = [...state];
-            copy[i] = value;
+            copy[i] = xIsNext ? "X" : "O";
             return copy;
         default:
             return state;
     }
 };
 
+const xIsNext = (state: boolean = true, action: BoardActions) => {
+    switch (action.type) {
+        case getType(actions.clickSquare):
+            return !state;
+        default:
+            return state;
+    }
+};
+
 export default combineReducers({
-    squares
+    squares,
+    xIsNext,
 });
