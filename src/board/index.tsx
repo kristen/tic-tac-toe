@@ -7,8 +7,13 @@ import {BoardActions} from './actions';
 import {Dispatch} from "redux";
 import {BoardState} from "./reducers";
 import {RootState} from "../reducers";
+import {getNextMove, getSquares, getXIsNext} from "./selectors";
 
-type Props = ReturnType<typeof mapDispatchToProps> & BoardState;
+interface OwnProps {
+    nextMove: string;
+}
+
+type Props = OwnProps & ReturnType<typeof mapDispatchToProps> & BoardState;
 
 class Board extends React.Component<Props, BoardState> {
     renderSquare(i: number) {
@@ -19,8 +24,8 @@ class Board extends React.Component<Props, BoardState> {
     }
 
     render() {
-        const {xIsNext} = this.props;
-        const status = `Next player: ${xIsNext ? "X" : "O"}`;
+        const {nextMove} = this.props;
+        const status = `Next player: ${nextMove}`;
 
         return (
             <div>
@@ -46,8 +51,9 @@ class Board extends React.Component<Props, BoardState> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    squares: state.board.squares,
-    xIsNext: state.board.xIsNext,
+    squares: getSquares(state),
+    xIsNext: getXIsNext(state),
+    nextMove: getNextMove(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<BoardActions>) => ({
