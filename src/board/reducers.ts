@@ -8,7 +8,7 @@ export interface BoardState {
     xIsNext: boolean;
 }
 
-const squares = (state: string[] =  new Array(9), action: BoardActions) => {
+export const squares = (state: string[] =  new Array(9), action: BoardActions) => {
     switch (action.type) {
         case getType(actions.clickSquare):
             const {i, xIsNext} = action.payload;
@@ -20,7 +20,7 @@ const squares = (state: string[] =  new Array(9), action: BoardActions) => {
     }
 };
 
-const xIsNext = (state: boolean = true, action: BoardActions) => {
+export const xIsNext = (state: boolean = true, action: BoardActions) => {
     switch (action.type) {
         case getType(actions.clickSquare):
             return !state;
