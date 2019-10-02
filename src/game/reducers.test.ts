@@ -1,5 +1,5 @@
 import {squares, xIsNext} from "./reducers";
-import {clickSquare} from "./actions";
+import {clickSquare} from "../board/actions";
 
 describe('board reducers', () => {
     describe('#squares', () => {

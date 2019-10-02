@@ -1,12 +1,16 @@
-import { createSelector } from "reselect";
+import {createSelector} from "reselect";
 import {RootState} from "../reducers";
-import {BoardState} from "./reducers";
+import {BoardHistory, GameState} from "./reducers";
 
-const getBoard = (state: RootState) => state.board;
-export const getSquares = createSelector(getBoard, (board: BoardState) => board.squares);
-export const getXIsNext = createSelector(getBoard, (board: BoardState) => board.xIsNext);
+const getGame = (state: RootState) => state.game;
+export const getHistory = createSelector(getGame, (game: GameState) => game.history);
+export const getCurrentSquares = createSelector(getHistory, (history: BoardHistory[]) => {
+    const current = history[history.length - 1];
+    return current ? current.squares : new Array(9);
+});
+export const getXIsNext = createSelector(getGame, (game: GameState) => game.xIsNext);
 export const getNextMove = createSelector(getXIsNext, (xIsNext: boolean) => xIsNext ? "X": "O");
-export const getWinner = createSelector(getSquares, (squares: string[]) => {
+export const getWinner = createSelector(getCurrentSquares, (squares: string[]) => {
     const winningLines = [
         [0, 1, 2],
         [3, 4, 5],

@@ -1,12 +1,28 @@
 import {getType} from "typesafe-actions";
-import * as actions from "./actions";
-import {BoardActions} from "./actions";
+import * as actions from "../board/actions";
+import {BoardActions} from "../board/actions";
 import {combineReducers} from "redux";
 
-export interface BoardState {
+export interface BoardHistory {
     squares: string[];
+}
+
+export interface GameState {
+    history: BoardHistory[];
     xIsNext: boolean;
 }
+
+export const history = (state: BoardHistory[] = [], action: BoardActions) => {
+    switch (action.type) {
+        case getType(actions.clickSquare):
+            const current = state[state.length - 1];
+            const currentSquares = current && current.squares;
+            const updatedSquares = squares(currentSquares, action);
+            return [...state, {squares: updatedSquares}];
+        default:
+            return state;
+    }
+};
 
 export const squares = (state: string[] =  new Array(9), action: BoardActions) => {
     switch (action.type) {
@@ -30,6 +46,6 @@ export const xIsNext = (state: boolean = true, action: BoardActions) => {
 };
 
 export default combineReducers({
-    squares,
+    history,
     xIsNext,
 });

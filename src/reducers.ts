@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import board, {BoardState} from './board/reducers';
+import game, {GameState} from "./game/reducers";
 
 export interface RootState {
-    board: BoardState;
+    game: GameState;
 }
 
 export default combineReducers<RootState>({
-    board
+    game,
 });

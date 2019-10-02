@@ -1,8 +1,8 @@
 import {RootState} from "./reducers";
 
 export const mockRootState: RootState = {
-    board: {
-        squares: [],
+    game: {
+        history: [],
         xIsNext: true,
     }
 };
