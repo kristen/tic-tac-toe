@@ -7,25 +7,29 @@ import {BoardActions} from './actions';
 import {Dispatch} from "redux";
 import {BoardState} from "./reducers";
 import {RootState} from "../reducers";
-import {getNextMove, getSquares, getXIsNext} from "./selectors";
+import {getNextMove, getSquares, getWinner, getXIsNext} from "./selectors";
 
 interface OwnProps {
     nextMove: string;
+    winner: string|null;
 }
 
 type Props = OwnProps & ReturnType<typeof mapDispatchToProps> & BoardState;
 
 class Board extends React.Component<Props, BoardState> {
     renderSquare(i: number) {
-        const {squares, xIsNext, clickSquare} = this.props;
-        return <Square onClick={() => clickSquare(i, xIsNext)}>
+        const {squares, xIsNext, winner, clickSquare} = this.props;
+        return <Square onClick={() => {
+            if (winner) return;
+            clickSquare(i, xIsNext)
+        }}>
             {squares[i]}
         </Square>
     }
 
     render() {
-        const {nextMove} = this.props;
-        const status = `Next player: ${nextMove}`;
+        const {nextMove, winner} = this.props;
+        const status = winner ? `Winner: ${winner}` : `Next player: ${nextMove}`;
 
         return (
             <div>
@@ -54,6 +58,7 @@ const mapStateToProps = (state: RootState) => ({
     squares: getSquares(state),
     xIsNext: getXIsNext(state),
     nextMove: getNextMove(state),
+    winner: getWinner(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<BoardActions>) => ({
