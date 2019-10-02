@@ -49,3 +49,23 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 yarn create react-app tic-tac-toe --typescript
 yarn add typescript @types/node @types/react @types/react-dom @types/jest
 ```
+
+### Technologies used in this project uses
+
+#### TypeScript
+
+[TypeScript](https://github.com/microsoft/TypeScript) is a language for application-scale JavaScript.
+TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser,
+for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript.
+
+#### reselect
+
+[reselect](https://github.com/reduxjs/reselect) is a simple “selector” library for Redux.
+
+#### typesafe-actions
+
+[typesafe-actions](https://github.com/piotrwitek/typesafe-actions) is a typesafe utilities designed to reduce types verbosity and complexity in Redux Architecture.
+
+#### Redux Thunk
+
+[Redux Thunk](https://github.com/reduxjs/redux-thunk) is thunk [middleware](https://redux.js.org/advanced/middleware) for redux.
